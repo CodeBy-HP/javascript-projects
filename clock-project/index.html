@@ -3,33 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Analog Clock</title>
+    <title>Standard Analog Clock</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="clock">
-      <div class="hand hour"></div>
-      <div class="hand minute"></div>
-      <div class="hand second"></div>
+    <div class="clock-container">
+      <div class="clock">
+        <div class="center-dot"></div>
 
-      <!-- Numbers -->
-      <div class="numbers">
-        <span style="--i: 1"><b>1</b></span>
-        <span style="--i: 2"><b>2</b></span>
-        <span style="--i: 3"><b>3</b></span>
-        <span style="--i: 4"><b>4</b></span>
-        <span style="--i: 5"><b>5</b></span>
-        <span style="--i: 6"><b>6</b></span>
-        <span style="--i: 7"><b>7</b></span>
-        <span style="--i: 8"><b>8</b></span>
-        <span style="--i: 9"><b>9</b></span>
-        <span style="--i: 10"><b>10</b></span>
-        <span style="--i: 11"><b>11</b></span>
-        <span style="--i: 12"><b>12</b></span>
+        <div class="hand hour-hand" id="hour"></div>
+        <div class="hand minute-hand" id="min"></div>
+        <div class="hand second-hand" id="sec"></div>
+
+        <span class="number number-1">1</span>
+        <span class="number number-2">2</span>
+        <span class="number number-3">3</span>
+        <span class="number number-4">4</span>
+        <span class="number number-5">5</span>
+        <span class="number number-6">6</span>
+        <span class="number number-7">7</span>
+        <span class="number number-8">8</span>
+        <span class="number number-9">9</span>
+        <span class="number number-10">10</span>
+        <span class="number number-11">11</span>
+        <span class="number number-12">12</span>
       </div>
-
-      <!-- Center point -->
-      <div class="center-dot"></div>
     </div>
 
     <script src="script.js"></script>

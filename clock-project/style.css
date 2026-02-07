@@ -1,95 +1,162 @@
-/* RESET & BASE */
+/* --- Global Variables and Reset --- */
+:root {
+  --bg-color: #212121;
+  --clock-size: 300px;
+  --clock-face-color: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.25);
+  --shadow-color: rgba(0, 0, 0, 0.9);
+  --center-dot-color: white;
+
+  /* Hand Colors & Sizes (Hand length is set from the center of the clock) */
+  --hour-color: #ff3d58;
+  --minute-color: #00a6ff;
+  --second-color: white;
+
+  --hour-length: 74px;
+  --minute-length: 84px;
+  --second-length: 94px;
+  --hand-width: 4px;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
+  color: #ffffff;
 }
 
 body {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #212121;
-  font-family: sans-serif;
-  color: white;
+  min-height: 100vh; /* Use min-height for better compatibility */
+  background-color: var(--bg-color);
 }
 
-/* CLOCK CONTAINER */
+/* --- Clock Structure --- */
 .clock {
   position: relative;
-  width: 300px;
-  height: 300px;
-  border: 2px solid rgba(255, 255, 255, 0.25);
+  width: var(--clock-size);
+  height: var(--clock-size);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+  background-color: var(--clock-face-color);
+  border: 2px solid var(--border-color);
+  box-shadow: 0px 0px 30px var(--shadow-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* NUMBERS AROUND THE CLOCK */
-.numbers {
+.center-dot {
   position: absolute;
-  inset: 0;
-  pointer-events: none; /* so numbers don't block pointer events */
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--center-dot-color);
+  z-index: 10; /* Make sure it's above the hands */
 }
 
-.numbers span {
-  --r: calc(30deg * var(--i));
-  position: absolute;
-  inset: 12px; /* create an inner ring */
-  display: block;
-  transform: rotate(var(--r)); /* rotate the span around clock center */
-  transform-origin: center;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-/* place the visible number upright by counter-rotating the inner element */
-.numbers span b {
-  display: inline-block;
-  transform: rotate(calc(-1 * (30deg * var(--i))));
-  transform-origin: center;
-  /* adjust distance from center (push toward outer rim) */
-  margin-top: -6px; /* tweak as needed to move numbers outward */
-}
-
-/* HANDS */
+/* --- Clock Hands Styling --- */
 .hand {
   position: absolute;
-  bottom: 50%;
-  left: 50%;
-  transform-origin: bottom center;
-  transform: rotate(0deg);
-  border-radius: 10px;
+  /* Hands start at the center and rotate from there */
+  display: flex;
+  justify-content: center;
+  z-index: 5;
+
+  /* Initial state: Hands should not be visible until their specific styles are applied */
+  width: var(--hand-width);
+  transform-origin: bottom; /* Key property: rotation happens from the bottom/base of the hand */
+  bottom: calc(
+    var(--clock-size) / 2
+  ); /* Aligns the base of the hand to the center */
 }
 
-.hour {
-  width: 6px;
-  height: 70px;
-  background-color: #ff3d58;
+/* Specific styling for each hand's appearance */
+.hour-hand {
+  height: var(--hour-length);
+  background-color: var(--hour-color);
+  border-radius: var(--hand-width);
 }
 
-.minute {
-  width: 4px;
-  height: 90px;
-  background-color: #00a6ff;
+.minute-hand {
+  height: var(--minute-length);
+  background-color: var(--minute-color);
+  border-radius: var(--hand-width);
 }
 
-.second {
-  width: 2px;
-  height: 110px;
-  background-color: white;
+.second-hand {
+  height: var(--second-length);
+  background-color: var(--second-color);
+  border-radius: var(--hand-width);
+  width: 2px; /* A thinner second hand is common */
 }
 
-/* CENTER DOT */
-.center-dot {
+/* --- Clock Numbers Positioning (More intuitive CSS approach) --- */
+.number {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 10px;
-  height: 10px;
-  background: white;
-  border-radius: 50%;
+  font-size: 20px;
+  /* Center the number itself */
   transform: translate(-50%, -50%);
 }
+
+/* Position each number by rotating its container. 
+   The numbers are placed on a circle with 30deg increments (360/12 = 30) */
+.number-1 {
+  transform: translate(-50%, -50%) rotate(30deg) translateY(-130px)
+    rotate(-30deg);
+}
+.number-2 {
+  transform: translate(-50%, -50%) rotate(60deg) translateY(-130px)
+    rotate(-60deg);
+}
+.number-3 {
+  transform: translate(-50%, -50%) rotate(90deg) translateY(-130px)
+    rotate(-90deg);
+}
+.number-4 {
+  transform: translate(-50%, -50%) rotate(120deg) translateY(-130px)
+    rotate(-120deg);
+}
+.number-5 {
+  transform: translate(-50%, -50%) rotate(150deg) translateY(-130px)
+    rotate(-150deg);
+}
+.number-6 {
+  transform: translate(-50%, -50%) rotate(180deg) translateY(-130px)
+    rotate(-180deg);
+}
+.number-7 {
+  transform: translate(-50%, -50%) rotate(210deg) translateY(-130px)
+    rotate(-210deg);
+}
+.number-8 {
+  transform: translate(-50%, -50%) rotate(240deg) translateY(-130px)
+    rotate(-240deg);
+}
+.number-9 {
+  transform: translate(-50%, -50%) rotate(270deg) translateY(-130px)
+    rotate(-270deg);
+}
+.number-10 {
+  transform: translate(-50%, -50%) rotate(300deg) translateY(-130px)
+    rotate(-300deg);
+}
+.number-11 {
+  transform: translate(-50%, -50%) rotate(330deg) translateY(-130px)
+    rotate(-330deg);
+}
+.number-12 {
+  transform: translate(-50%, -50%) rotate(360deg) translateY(-130px)
+    rotate(-360deg);
+}
+
+/* Explanation of the number transform:
+   1. translate(-50%, -50%): Centers the number text on the start position (center of the clock).
+   2. rotate(Xdeg): Rotates the number *around* the clock face's center.
+   3. translateY(-130px): Moves the number out to the edge of the clock (radius minus some padding).
+   4. rotate(-Xdeg): Rotates the number *back* by the same amount so the text is upright.
+*/
